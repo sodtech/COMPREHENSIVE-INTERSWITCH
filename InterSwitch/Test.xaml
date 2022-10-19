@@ -1,0 +1,110 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Test" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="466,879" sap2010:WorkflowViewState.IdRef="Test_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Test" sap:VirtualizedContainerService.HintSize="476,814" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" DisplayName="Use Browser Chrome: PAYDirect - powered by Interswitch" sap:VirtualizedContainerService.HintSize="434,722" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,506" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'INPUT '" EmptyFieldMode="None" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="WindowMessages" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Text="PHCN PAYdirect" Version="V1">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/common/ReportsOptions.aspx" DesignTimeRectangle="228, 350, 1047, 34" ElementType="InputBox" FriendlyName="'INPUT txtPrd'" FullSelectorArgument="&lt;webctrl src='frames/body*' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl omit:tableRow='1' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' class='frame-mainbody' name='mainbody' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='text' tag='INPUT' class='form-control' aaname='Product Search' /&gt;" Guid="609d9ab3-2ad0-4edd-8e15-030fb04931dd" ImageBase64="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" InformativeScreenshot="5a8557062d79c28717ccff7d2ab891b2.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" />
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <uix:NClick ClickType="Single" DisplayName="Click 'Search'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/common/ReportsOptions.aspx" DesignTimeRectangle="1275, 350, 65, 34" ElementType="Button" FriendlyName="'Search'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tableRow='*' tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl class='btn' tag='INPUT' type='submit' aaname='Search' check:text='Search' /&gt;" Guid="a074d6c4-a2d9-4ef4-890b-58beb7137401" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEUAAAAmCAYAAACS7VbdAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHFSURBVGhD7ZpBbsIwEEVzqZ6pl+EAvUUl7sCOAyB1waaRWlpFBUpKwPHUdvzJ2DioVEEKMF+8RYwVZx5js0m2+Fb0uVH09VPTutK02dW0VZp2BlVrMh+H9txDstelore1og8mptxpqvaa9jU5MdaF416kPD6/k+Xh6eXuQbKiKESKB8mUUiLFg2TaHBQipQERKQxEpDAQkcJARAoDESkMRKQwEJHCQEQKA7luKZOSVqRoOkl89w+QHqQsaLr1d0OKZWLeBRimFC8kkLCk+bakUTDvQgxSyh8eapQrv5QJlzer/KDP4Tsj1VzOc3tvNu7WarPKF+36eXsvN441zgTpp1O6OsMVXtHYXftiZ9EcSyC3mRfesxk7KhiiIC5Y73yQC5wpbeeMi7AQex1uNcCFJeR1FRt3anx9JkgPUkKa7WIfLHEA20TbhKdLirtnqhuvRQovKu6UlviAvqVOsQ8RbYemU3wBcTFm/txJaqQcCnfzTkjxY+kzZXCdktoi4S8a/PvwB/YiXIrqdKdYXMFtnKBhSrktEJHCQEQKAxEpDESkMBCRwkBECgMRKQxEpDAQkcJARAoDkZd2GIi83pWIvAh4FKJfzqfhasyldhYAAAAASUVORK5CYII=" InformativeScreenshot="fbd83ee875eaeffb689382277d18c15c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1382, 744" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="ba00ba723ec57aef9a09666ab4e73ad1.png" Selector="&lt;html app='chrome.exe' title='PAYDirect*' /&gt;" Url="https://172.25.15.11/paydirect/main.htm" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

@@ -1,0 +1,846 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="DownloadReport" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="Out_FileDownloaded" Type="OutArgument(si:FileInfo)" />
+    <x:Property Name="in_ReportDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_ReportName" Type="InArgument(x:String)" />
+    <x:Property Name="in_FileName" Type="InArgument(x:String)" />
+    <x:Property Name="in_Category" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:DownloadReport.in_Category>
+    <InArgument x:TypeArguments="x:String" />
+  </this:DownloadReport.in_Category>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>704,2487</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>DownloadReport_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="40">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="35">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="DownloadReport" sap:VirtualizedContainerService.HintSize="552,2422" sap2010:WorkflowViewState.IdRef="Sequence_13">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="ExtraSwitchUrl" />
+      <Variable x:TypeArguments="x:String" Name="DownloadFolder" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT" />
+      <Variable x:TypeArguments="x:String" Name="TableRow" />
+      <Variable x:TypeArguments="x:String" Name="Selector" />
+      <Variable x:TypeArguments="ui:UiElement" Name="ReportElement" />
+      <Variable x:TypeArguments="x:String" Name="ReportFound" />
+      <Variable x:TypeArguments="x:String" Name="NextButton" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,51" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="473,347" sap2010:WorkflowViewState.IdRef="Sequence_31">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MultipleAssign DisplayName="TO TEST" sap:VirtualizedContainerService.HintSize="431,255" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[in_Config]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[new Dictionary(of string , Object)]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[in_Config("DownloadFolderPath")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">["C:\Users\tmpa11194\Downloads"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[in_Config("Extraswitch_Url")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">["https://webpay.interswitchng.com/extraswitch/login.do"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[in_Category]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">NO</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[in_ReportDate]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">01/08/2022</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[in_ReportName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">FBN_Daily_Comprehensive_Computation0_Report</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:MultipleAssign DisplayName="WF Variables" sap:VirtualizedContainerService.HintSize="510,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[ExtraSwitchUrl]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Config("Extraswitch_Url").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DownloadFolder]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_Config("DownloadFolderPath").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Firefox: ExtraSwitch" sap:VirtualizedContainerService.HintSize="510,2068" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="Simulate" OpenMode="IfNotOpen" ScopeGuid="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do: Log in" sap:VirtualizedContainerService.HintSize="476,1852" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="CountIndex" />
+              <Variable x:TypeArguments="x:Boolean" Name="NoResultFound" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Tab" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MaximizeWindow>
+            <uix:NClick ClickType="Double" DisplayName="Click REPORT'" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/displayMenu.do" DesignTimeRectangle="55, 391, 132, 12" ElementType="Text" FriendlyName="'Reports'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl idx='6' tableRow='1' tag='TABLE' /&gt;&lt;webctrl isleaf='1' tableRow='1' tag='TD' aaname=' Reports ' colName=' Reports ' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl isleaf='1' type='' tag='TD' aaname=' Reports ' colName=' Reports ' class='menuLink' check:text='Reports' /&gt;" Guid="263cd294-b8c9-4df7-8643-6a9c274cbc74" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIgAAAAQCAYAAADNjzd8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAElSURBVGhD7ZbBEYMgEEVTLV1QBh3kRhcc0gNVUMJGEGFddc1Momacf3gHWRYyw8uHR0qJANgCggAVCAJUIAhQgSBAhQkSyVtDxnRcmE8+nkDOOAqrNXAFQhBLPtbv6MmeflgQ5N/QBbGeYqvXMZYw1kfWO08f40LvC25Wa8lU9rB1TUdP1+eYsrdcl/0+cArKFSP+yYtE4UIJuepaRYRFX06JOne11r+jH+RpEoIr2EgQdohTXaTAxJgGUpBEYUiDUst9PE14rSQIT6nlFZPntv3EOuB4Pn+DLA6TIwXZSwlW2xGE08RaqYFj2BYkU1JDSMLSo78Jci8fFwepvkHm0rXEGMZfwxXD+8Z3SZ8LjocJ8g0rcoFbAEGAyo8EAXcFggCFRG9v76p39G7QfAAAAABJRU5ErkJggg==" InformativeScreenshot="836c4520fa341108e0db9b4206661253.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="36, 391, 18, 18" ElementType="Icon" FriendlyName="'IMG'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl idx='6' tableRow='1' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='IMG' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' tag='IMG' class='' aaname='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH1SURBVDhPtZLfS1NxGMYD3QiCoK666aKLbuvev0AjKSgksqAfFLELW6EiGSkVQRBUF5FeJWiKTbfJGkZlNMioQCyaoNZJB5Lb8PxwO8fjzkafzjZZ58R3EWEXD+/Fec6H53nf7xZVVdkM/R+QoiilmUorDITiDIfjaJpW+f4nuUCyLJfmw/4PNN37zLajYU74A+StdTLZTMUnkjBRb/87th5/ibc9Tm3DKGc7IlDIk82ubnjLPqeEINMw8HXboPoRvG2f8DSM0NwyTMGyqiYTLlvTVHKGzrnOcTwHgnhaP1JTP0qzXfNHwXIk+yUhqCjFjm/qWXzXJ6g5FMF7eZrag2Oc6Yxi2InV345QBbSxA9ucN3Uu3Iqxyxdjz404O04+Z2hsyq7vTlUVpNhTk9MsLhtc6ZujZWiexp4v7PO/YTD4mjX9r0BFSJKFZZ2uJ0t0PU1wLbxAXfskl24OkE4u2fXWXH7xsleSJNImt6My5wclDt+dps4fo+1OgMS3WXQbUjyI8x8XSFHKU0oZ9L61OPZIYvvpF+w9NU7H/TCL0iw5Ky987ULQ48kVLgZTeI9E2dkY4OqDSClJEeL0O+UCyXL5WhNxhf2t79ndFKK7J4I0P4O5nqv4RBIm0lYzPJv6Tl/oFV/nZrCq1HFKuOx/0SaBVH4CuJGEcRVPlc4AAAAASUVORK5CYII=" SearchSteps="Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <uix:NClick ClickType="Double" DisplayName="Click REPORT ROOT'" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/displayMenu.do" DesignTimeRectangle="22, 415, 192, 12" ElementType="Text" FriendlyName="'Reports Root'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl parentid='smenu6' tableRow='1' tag='A' aaname='Reports Root' innertext='Reports Root' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl parentid='smenu6' type='' tag='A' aaname='Reports Root' innertext='Reports Root' class='innerLink' check:text='Reports Root' /&gt;" Guid="9ffb431b-b450-4f40-9e65-c2b6d66b7ab0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMQAAAAQCAYAAABJCdBSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGUSURBVGhD7ZcxjsIwEEX3TnubHADtLcgpkJaOkmoLunTUiBvQ0NCRK8x6HI8zNnEWpMTZhP8kS/Ewzkzx/5h8kKGuayyst1+MNwQA7wwMAYAChgBAAUMAoBjfEOeKPlfffhWHu/thBLjW9uI2PQzV07P1wGzIYwgvmgutV3va3dx2aF4xxBA9wRCLYwJDVHS0z3falTKlXYxzyz0VfnpLLtFxKzGzyhNdOXg7UeHzf+hLn+N3yT4WbbKnRJ3OOJ+TWHsezJs8hvDCaSfx9WCELH9VWNgsUGuIVoSSE+Qa/J7PaTEqobOA12f7+MgzPRn+rB8YCyyBjDdEM1FFpMHE5cVGiAXm9g/iFgPZG6I1UCBQa5bm3VrMlp6euuok68f9gtmT0RAGK9JmovOUDUTGRAJjIcqE1nE/ofsM4TGi1zlMT09ddZL1YYjFkdcQBisuK0D9DWEW53Cu7CXmCG4UEXhsCCtuzqloo/LTN0RD21OiTiqu6uEbYhmMb4hXwMQFEwNDAKD4X4YAYGJgCAAUjQeIfgG6jaU50EWwjwAAAABJRU5ErkJggg==" InformativeScreenshot="bffc2e10307eb302ee7dcb6af334b41a.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="55, 391, 132, 12" ElementType="Text" FriendlyName="'Reports'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl idx='6' tableRow='1' tag='TABLE' /&gt;&lt;webctrl isleaf='1' tableRow='1' tag='TD' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayMenu.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl isleaf='1' type='' tag='TD' class='menuLink' aaname=' Reports ' check:innerText='Reports' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIgAAAAQCAYAAADNjzd8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAElSURBVGhD7ZbBEYMgEEVTLV1QBh3kRhcc0gNVUMJGEGFddc1Momacf3gHWRYyw8uHR0qJANgCggAVCAJUIAhQgSBAhQkSyVtDxnRcmE8+nkDOOAqrNXAFQhBLPtbv6MmeflgQ5N/QBbGeYqvXMZYw1kfWO08f40LvC25Wa8lU9rB1TUdP1+eYsrdcl/0+cArKFSP+yYtE4UIJuepaRYRFX06JOne11r+jH+RpEoIr2EgQdohTXaTAxJgGUpBEYUiDUst9PE14rSQIT6nlFZPntv3EOuB4Pn+DLA6TIwXZSwlW2xGE08RaqYFj2BYkU1JDSMLSo78Jci8fFwepvkHm0rXEGMZfwxXD+8Z3SZ8LjocJ8g0rcoFbAEGAyo8EAXcFggCFRG9v76p39G7QfAAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <If Condition="[in_Category.ToUpper  &lt;&gt; &quot;NO&quot;]" DisplayName="If Category Is No" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence DisplayName="Sequence Category Type" sap:VirtualizedContainerService.HintSize="376,444" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NSelectItem DisplayName="Select Item 'Report Type'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="[in_Category]" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+                    <uix:NSelectItem.Items>
+                      <scg:List x:TypeArguments="x:String" Capacity="31">
+                        <x:String>All Categories</x:String>
+                        <x:String>ATM Detail</x:String>
+                        <x:String>Autopay</x:String>
+                        <x:String>BillPayment</x:String>
+                        <x:String>BillsOnline</x:String>
+                        <x:String>CashCard</x:String>
+                        <x:String>Extract</x:String>
+                        <x:String>Glo</x:String>
+                        <x:String>ISO Detail</x:String>
+                        <x:String>Mastercard</x:String>
+                        <x:String>Miscellaneous</x:String>
+                        <x:String>Mobility</x:String>
+                        <x:String>NIBSS</x:String>
+                        <x:String>Not_on_us</x:String>
+                        <x:String>Partner Payment</x:String>
+                        <x:String>PAYDirect</x:String>
+                        <x:String>Payment_Gateway</x:String>
+                        <x:String>POS_@Branch_POS_Acquired</x:String>
+                        <x:String>POS_Acquired</x:String>
+                        <x:String>Product Documents</x:String>
+                        <x:String>Recharge</x:String>
+                        <x:String>Remote_On_Us</x:String>
+                        <x:String>Remote_POS</x:String>
+                        <x:String>Remote_WEB</x:String>
+                        <x:String>Response_Code_Analysis</x:String>
+                        <x:String>Settlement</x:String>
+                        <x:String>Verve_Billing</x:String>
+                        <x:String>Verve_International</x:String>
+                        <x:String>Verve_Rate</x:String>
+                        <x:String>VISA</x:String>
+                        <x:String>Web_Acquired</x:String>
+                      </scg:List>
+                    </uix:NSelectItem.Items>
+                    <uix:NSelectItem.Target>
+                      <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/displaySearchReportsAction.do" DesignTimeRectangle="376, 296, 200, 19" ElementType="DropDown" FriendlyName="'All Categories'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='3' tag='TABLE' /&gt;&lt;webctrl tableRow='3' tag='SELECT' class='formselect' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' tag='SELECT' class='formselect' aaname='' /&gt;" Guid="e38b2442-6834-44e2-b71d-934f1fc58874" ImageBase64="" InformativeScreenshot="a3f199310d7d018372bf7815bc711975.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector" Visibility="Interactive">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                            <uix:Target DesignTimeRectangle="244, 295, 130, 21" ElementType="Text" FriendlyName="'Report Type'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='3' tag='TABLE' /&gt;&lt;webctrl tableRow='3' tag='TD' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' tag='TD' class='formlabel' aaname='Report Type ' check:innerText='Report Type' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIYAAAAZCAYAAAD0SVYHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGRSURBVGhD7ZbrbcJAEIRTrbtwGa7CXbgLqnAJjibSWJNl7gwhIQjPj09w+/btyPCxrusWQiXCCJYII1gijGCJMIIlwgiWCCNYIoxgiTCCZRfG5XLZhmG4AnZNeAbs3fNVxnG08eFnXAmDF6xCYcyzuKXvPM9fMfh0/vAYTWGAuqBlWXabxrq3jdbhEgmXqT1Ze5qmb7GAdRQnDNSBDXVx1vpHM7ae7awcvjGwKD1zEbxInGuuLk0XDh8XD7vm4RMgRr+30B601V6Mqb1qfu/ZWPtsdP9j8IIBL9LF1EvXBakQqk97sg9wtoouVu2aS8Hhe2/G3rOx7tmwbwxdGBfaWkTNxfleYTCPwAbUVmnNQzv70n+LMGqtM9P8KeHFAfj0zJxWropBF1B9fyEM1iQ4q703I9BaZ6b755OXB+Cvlw6wGGenEACXSLhM19PFq6/GsJbCuXWGoxlbz0b/2diF8QitBf8XmAPz4E1A26vN+Oq8nTBas0QY9/ErwgjvR4QRLBFGsEQYwRJhBEuEEQzr9gm0BCciNYYA8AAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NSelectItem.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NSelectItem>
+                  <uix:NClick ClickType="Single" DisplayName="Click 'Reports'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="WindowMessages" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/displaySearchReportsAction.do" DesignTimeRectangle="238, 221, 479, 34" ElementType="Text" FriendlyName="'Reports'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl css-selector='body&amp;gt;form&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td' isleaf='1' tableRow='1' tag='TD' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' isleaf='1' class='topbar' tag='TD' aaname='Reports ' check:innerText='Reports' /&gt;" Guid="f1824f70-9f06-484e-85ac-f93c74f05d62" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAeMAAAAmCAYAAAD3JfOLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJBSURBVHhe7drtTRtREIbRVEsPVAEF0AB98NNF0ImjSXit0bBYEdn1tcQ50kjm7tfNr4fF+XUGAJYSYwBY7BLj0+lkjDHGmBtOeDMGgMXEGAAWE2MAWEyMAWAxMQaAxcQYABYTYwBYTIwBYDExBoDFxBgAFvtWjB8eHq7OPXt/fz8/Pj5+/AQA6x0S45p79Pb29mdvYgzAPfmvGFfcpmvHVhNjAO7R7jGu0NWx19fXj5W/ck3NjGGdm/V8zmzJMzJzH1l/fn6+fH56erp8zmSP85liDcAt7Rrj+j52Hutrc2LGcE63dbwmYS1bx19eXj6t1TVfPVuQAbiVQ74z7iHL22mP5VzrQdyKeNb6m27UsazVNSU/z6Dm3Gv768/N/QDgSLvHOOGMrXMyFcKSGM94JpQ5L9fNZ9R1tZ6gfnXeVoz7LwI1uQcA3Mouf6buQZsxy/rWJIq5PtGNuZ7r5htrop1n57x/iXFJzOcAwC3s9p1xgjjXt9amRHdGMvecMZ73Sky/G+Ou/ztyPwA40q7/gSvrPXaJW1+b8UyMa3LPPb4znvvr58bcS5m/BADAkXaNcY9d4tajOid6jOf0iF+7V49p1q7tr6ZiO9f6zOsB4Ai7xrj0t9e8qW5FtEuMK7w9zD3EXd5mM3MfX62Xvr+8+W4FOXsHgKN9K8Z76zEGgJ9GjAFgMTEGgMXuIsYA8JOJMQAsJsYAsJgYA8BiYgwAi4kxACwmxgCw2CXGp9PJGGOMMTec8GYMAIuJMQAsdT7/BpGNImEkJakQAAAAAElFTkSuQmCC" InformativeScreenshot="3755aa14e2795e8c23ac061389ba982e.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_21">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:SetWebAttribute ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" Attribute="value" DisplayName="Set Start Date" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="SetWebAttribute_1" Value="[in_ReportDate]">
+              <ui:SetWebAttribute.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b4fd1dfc-dd9f-4391-ac64-e3108630d4fc" InformativeScreenshot="d50fc04d9d23b5a8d4f129a70ccf3e53" Selector="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='3' tag='TABLE' /&gt;&lt;webctrl tableRow='1' tag='INPUT' id='dateStart' name='dateStart' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SetWebAttribute.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:SetWebAttribute>
+            <ui:SetWebAttribute ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" Attribute="value" DisplayName="Set End Date" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="SetWebAttribute_2" Value="[in_ReportDate]">
+              <ui:SetWebAttribute.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b4fd1dfc-dd9f-4391-ac64-e3108630d4fc" InformativeScreenshot="d50fc04d9d23b5a8d4f129a70ccf3e53" Selector="&lt;webctrl tableRow='3' tag='BUTTON' /&gt;&lt;nav up='1' /&gt;&lt;webctrl tableRow='3' tag='INPUT' id='dateEnd' name='dateEnd' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SetWebAttribute.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:SetWebAttribute>
+            <uix:NClick ClickType="Single" DisplayName="Click 'search'" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="NClick_6" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/displaySearchReportsAction.do" DesignTimeRectangle="1110, 320, 50, 19" ElementType="Button" FriendlyName="'search'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='3' tag='TABLE' /&gt;&lt;webctrl tableRow='5' tag='INPUT' aaname='search' id='search' name='search' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='button' tag='INPUT' aaname='search' id='search' name='search' class='buttoncaption' check:text='search' /&gt;" Guid="1c7536b7-f4cc-4afc-940b-fff6037e38ff" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADYAAAAXCAYAAABAtbxOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFDSURBVFhH7ZexagJBFEXztfsV5hsESWsvwTatENDOUkghpFYh7CdMOMKR52SWkJDFzCTFQXnzZt49s1voXd/3qUX+hth+/5qWy6c0nc6rgsxkjy4XMRZoWq+36XB4S8djHZCVzGSPchcxrDebbTqdygf8ZshMdhw+iGFc05PKITsORbHShpqoRmy1ek5d16XZ7KG4nvMvdmtGF+NgBshi8XiuO1gmk/tzfbd7uaqDe1yj1/1DZ1nje6zTX+JLYgTiQIOJAXPJvA8Mxp4oxidEAfdwmXndC6ZuX+RbYmLwvC6+NqX1KAbOGAqsmGf+qBg4QBhgcEUj+ZqB8idm/83ExFAMiLJ5nwEUG3oV7fesoVdxFDFvX+JwQ0aUibXPxCBelOujitXEoFiTvxWb/XXf7P8x5bCmqSbIHKXgSqwlGhXr0ztnhOqGwEReVAAAAABJRU5ErkJggg==" InformativeScreenshot="d0b562869491a22450c9f6008ae95475.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <ui:InterruptibleDoWhile Condition="[NextButton &lt;&gt; &quot;NO&quot;]" CurrentIndex="[CountIndex]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,442" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch DisplayName="Try Catch If Report is Found" sap:VirtualizedContainerService.HintSize="438,293" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <TryCatch.Try>
+                      <Sequence DisplayName="Sequence: found Report" sap:VirtualizedContainerService.HintSize="304,496" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign DisplayName="Assign Selector Report Name" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Selector]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='*' tag='TABLE' /&gt;&lt;webctrl isleaf='*' tableRow='*' tag='TD' aaname='"+in_ReportName+"*' parentid='reportsList' /&gt;"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <uix:NGetAttribute Attribute="tableRow" DisplayName="Get Attribute 'FBN_Daily_Comprehensive…'" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="NGetAttribute_1" OutUiElement="[ReportElement]" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Timeout="4" Version="V1">
+                          <uix:NGetAttribute.Result>
+                            <OutArgument x:TypeArguments="x:String">[TableRow]</OutArgument>
+                          </uix:NGetAttribute.Result>
+                          <uix:NGetAttribute.Target>
+                            <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/searchReportsAction.do?org.apache.struts.taglib.html.TOKEN=2e58c06af9b984c3ad519b2447fe3b3f&amp;domainId=4&amp;dateStart=01%2F08%2F2022&amp;reportTypeId=6&amp;dateEnd=01%2F08%2F2022" DesignTimeRectangle="261, 516, 999, 19" ElementType="Text" FriendlyName="'FBN_Daily_Comprehensive…'" FullSelectorArgument="[Selector]" Guid="fc62854b-e73c-4fd8-8f64-a4f0c325dfe0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAA+sAAAAXCAYAAABzuN62AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAbrSURBVHhe7Zo9chw3EEb3WvSBeAbfQs58C4c8gUPmdhUTZU5cGzlxRPtb6ys1240Ghhrujsj3ql4NgMb/jGTAq9P5fH5+fHx81hMRERERERERb2O8m5+UQURERERERMTjeHr+FyUAAAAAAAAA4HbEuzmXdQAAAAAAAIADwGUdAAAAAAAA4GBML+unH39DRETcTQAAAACYw2UdERGvKgAAAADMebeX9Tj3mP5oXnPt1xzrPcr+4UdxK6fT5T9Pu7F3fwAAAABvwdJlPfP059+Xcj0zP/z8+cWBzHVjWcyPnPW9RVGVb1XjV1R1j+LR57fVI78DzS1/7yO31N3L/Gfqp1/PZb23dOu6H37/68ts/0PtHcvfQox17bpYZzdejt3/8seLtiO7Pq32qyqf2bWrYq/d66jIa9d3ZjSG622ByzoAAAB8RJYv6/HwZfOBT4e0eBAXOpzFS4FwurM6TIrXXDBEVb5FrU3kOWk+t7j0rCqq8u/Ro78DzSt+/51b6u5l/jOl/Oqlci+3rjvWzX+/xPlXMae3xDpVbzRe/C71FI51dn3qmzbxvc3s2nWxOHaeSzfPWCfWkxqvqruVE5d1AAAA+IDsflmPlyaRD64x3Zn7tsLlqhOJh0SR05qbf9mx+X8mjBTVfKIaP5LnE3+58lxM3rdRTGtW3qjMe2xW+3ptu1guvC9CT9VVHdd3G/fRjdspjvAOhNMxH79Hr3/0jVZ1hZ5y6zoc69SYcf/UR+z3td9DN9f8vVbr3qLa66m5Oh1jo+8j1412MTsbT8RYzleurqEqW7Frt9Kn57YyT39L+Zsa7UPm06dP/7tAK69yp839/f0lb5+enr5EvrJ3fwAAAAC3YPmyHvFhTAe2THVQ0wHOh3uXzRwdJvNh0Kpu7LtLu9/cZqTq5cNq1n25bxnzwvN23ZyP7fI+uh/NI19yRMzHvRPdOE7LlXYqi+Mr73quk9Oz2OhdRxU/yjsQLo95xbs5xjGqujEmPJ5jzovRvDvzPoucd1rG+qLaD48/6ld9xO9F5d0edervEPdV9ZPXZ2O7LbHobDw9I9U8srM+u7IVu3azPrfstepKpdUmf5sR16vQRfru7u6S1vPh4eGSFrpEC5Xpcm2Uj/Uie/cHAAAAcG12/WXdZT6suZ0PbbFs5ugwGQ+DemZcb5TOB0unOzWPfFjNai750B/nGucwy8e0jPPM+1LtgRiN6/avbSdNjMtYFucc93w27sgjvYMcc76aY7XeUV3Htq7D7yaWVapeJMaqeYrRmN6P2Vzz3FbeY6X6i+2qfvJYMrdbjWVn48XY6hpX11CVrdi162Jb9lp14/uP775qJ1Q+wr9y+xdwozKhX72Vdn7G3v0BAAAAXJPdL+vxYhbb+XAfyzqrvqXb60DodI516Zj3c0VRzcfmQ6uMB1cRY10+pmXsJ+9LNW409zU6ZGdH7WKZqdaous4Lt52N2xn7qaz6jnsnYqzLx7Rc6Udz0z65XPUds87nujG2dR3Vu6mM9ZT2n1NZjRnNY3o+s7nmuVXrnql55jZVP3msqt1KrLIbb7YHI1fWMCpbsWs3im3da9WvUHnVzvsyQpfqU3O5jqhMdr+E790fAAAAwDXZ/bIufEgVOSZi2chR3zoEKp0PyD4AxrpVWqqdcF8r+lCa56RxfTCN8ZwXsV2Xj2nn3c9sz6XmM3oHsb3Y2i7WkcpLpXMb7bON5WI0bqfqibx+tVVM5TGe8yK26/Ix7Xzsx2mNLZT2eG6j2OgbzXWl8455jJwXbiOrb6Iy1xNx33M+vhfhcufVV55bzucxHXd+ZvX9WPXt+empvGNduy7WORovr1nm/MhuDbHOSl/Zrl0V6/ZlZZ5S7V1PxnbS+yL0q3f+J+izf7auS3csV94X8b37AwAAALg133xZz+SDWazvy1YsG1n1XR0ujdOOjdLSh8VYtqLbZUbxbi+6fCYffvM+VPNyLKZlbP+adrmNykdtNG8R5y+7cWdWbcUo/hbvwN+xyN+d83rGvJjVFY5tWUf1TVTmeh7D4+cxhetm4ny6uVZzy+seWc1HuP8c9zhdu1mfnaPxpNpHVvqTXZ/xOxPxz1pn124Um+1LN8+o3mlee8SxSzpcrnVB9gXaKO+Ls2Pxn61LX8bF3v0BAAAA3Jqly/p7UwdWWcWO4Hvd9+9J3sFL2Q/cUwAAAACYc7PLekdVfy/9C1H+Zagj1ruGtxjzCHZU9d/SW4z5rXZU9be4Rx+VHVX9t7Sjqr9iR1V/xY6q/hEFAAAAgDnTyzoAAAAAAAAAXBcu6wAAAAAAAAAH48VlXRlEREREREREPI6n8/l8SeiJiIiIiIiIiLcx3s25rCMiIiIiIiIewK938/PzPwZatQwpD7C2AAAAAElFTkSuQmCC" InformativeScreenshot="a853d95494beb9f49e2bfc98543fc063.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive" />
+                          </uix:NGetAttribute.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NGetAttribute>
+                        <ui:LogMessage DisplayName="Log Message: Report Found" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Report has been found on Row :&quot;+TableRow]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                        <Assign DisplayName="Assign ReportFound" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[ReportFound]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">YES</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:Break sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Break_1" />
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <Assign DisplayName="Assign ReportFound" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[ReportFound]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">NO</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <If Condition="[ReportFound &lt;&gt;&quot;YES&quot;]" DisplayName="If ReportFound is not YES" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="Sequence Report " sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="Astate" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,293" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <TryCatch.Try>
+                            <Sequence DisplayName="Sequence: Next button" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uix:NGetAttribute Attribute="aastate" DisplayName="Get Attribute 'Next'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NGetAttribute_2" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Timeout="4" Version="V1">
+                                <uix:NGetAttribute.Result>
+                                  <OutArgument x:TypeArguments="x:String">[Astate]</OutArgument>
+                                </uix:NGetAttribute.Result>
+                                <uix:NGetAttribute.Target>
+                                  <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/searchReportsAction.do?d-8005955-p=1&amp;domainId=4&amp;reportTypeId=0&amp;org.apache.struts.taglib.html.TOKEN=23543bd9f08ec4224f8d1eefe42a38b7&amp;dateEnd=14%2F08%2F2022&amp;dateStart=14%2F08%2F2022" DesignTimeRectangle="359, 377, 26, 13" ElementType="Text" FriendlyName="'Next'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Next' parentid='gridPoint' tableRow='9' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Next' parentid='gridPoint' type='' tag='A' class='' check:text='Next' /&gt;" Guid="f0bb81c6-c4fc-4a12-8518-26faa553d597" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAB4AAAARCAYAAADKZhx3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADYSURBVEhL7ZPbEYMgEEVtinqshmaoxVpogXCcueaCZKIfwZ84c2YfbPbuollyzuUJ/sLTWOpTtm0bHv6SZmOGCCG0BTXn8V1Yqu8JJ+F1XUuMscl5zV0uC1PoYu7rTGhArNeBzhFVPUsd530x1rf2hu4DTfV9SET5lNLuX94Y61vL0gi/RwLAwOQ0NIyE9xvyBD+Sr62VQ8CvaoTqvwkTfxRW7Dl83xABxVgJYJX321O834wS0Av7xqAmzqgOiLW5XgEWGKoRnoEGrPb9F5rBMYCc2TwknMsLsP110w3Y9KAAAAAASUVORK5CYII=" InformativeScreenshot="a2553556ae61e54abc5bbd7112387863.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                                    <uix:TargetAnchorable.Anchors>
+                                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                        <uix:Target DesignTimeRectangle="238, 375, 1109, 18" FriendlyName="'[First/Prev] 1,'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='[First/Prev] , ,  [/]' tableRow='9' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='[First/Prev] , ,  [/]' type='' tag='SPAN' class='pagelinks' check:innerText='[First/Prev] 1, 2, 3 [Next/Last]' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAABFkAAAAWCAYAAAAb3EOUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP4SURBVHhe7drtTeRIEAZgkiIeoiEIUiAWYiEFTu/q6lRX6rE9jGfYXT0tPfL0Z7Xb/OkST1//lre3t6/Pz08AAAAADko+pYokCwAAAMA3SbIAAAAAnECSBQAAAOAEkiwAAAAAJ5BkAQAAADjBVUmWl5eXr6enp18+Pj6WY0rGrNq/6/X19ZdV373Uuz4/Py/7/yTXfLt7edQ3/Ju+GwAAAH+Oq5Ms7+/v/2urC+0ZF9tc/i/Nz9r1O2N6zOyrjz1T3vfIO1USY57Pnp78iGsSIHPuVuxL326+W9p6/VpHv+GtccqleEe/GwAAAJzllCRLr99i68Kc2FXPmJ6MSN+9/kNi77KeuDmDMs9nT1/72sRAP5Ocx9a3uPTt5tltrXHE0W94a5wiyQIAAMDv4m5Jlt6ey25PRqQta1U96rJc9X4hn3EzridZ+gV+FasSEKWSCnn2OJF6TzocvazX3uf5XOtIrJW9fc4zjOy3zqa31e+tc+vjovrrHKKf7Yw/55c+P/qcrNH7tv5m9s4DAAAAznZKkqWr/vyuMbnszgvwrEddmqu9zLbUM7bXK+6MFX0v0efPvlnPujP+Ssb09/+OVdJnT+Il7t4eL3276qsESn//eRb93CqhUu219tFvONdeyVo1Lutf8zeTvlU7AAAA3MvD/pOlLudRl+c5d3VhzmW+EgAlY2p+9P4ZK/vtY0u9R08wrGIdvazXnub5HHU0ziV1pqu+2Pp2fW49Mza/p75G1kxbP7Oj3zDzer2s4qa99lj1sooXt54nAAAAXOtHkixdXZyz7urCvJq7td7sy7rZdx/TZWztNc+57tHLesbUe6z6tyQBcSTGnq1z2ft26c8+qm3v3KLG9wRK4s93We2rxy6JOdtX49IWGb+KF+k740wBAADgqB9JsuRS3tdJPTKmz0t9ddFfXdq3+upCXvUZPzFKtZWjl/WMmXEi9UtnFJfixtbceTbz7KaMnXub41Pvbfnd5/Rzy7POJc9qn/uY+ywzdmSNPjb1Gnf0b6b0/QEAAMAj/EiSpS7GpV+GEyNtea7ixVxvr2/Gi95fl/lVrL3Lei76c+35PhnT55TVvqL2sTU3EqfPu3QmsTrLzOn1epeqXzq3OS5Sr70mVup5ruLW+KnPjfqd9rmXecY1vtr2vhsAAACc7eYkyz3VBfsn3XpZz9yt5MeWW+ZOj/525ae+oSQLAAAAj3Z1kqX+k+Csy//vrN711iTLqj1q/ZX03zJ3mt+uj7+n1V5W487S15dkAQAA4JGuSrIAAAAAsCbJAgAAAHCCi0kWAAAAAK5T5b8ki6IoiqIoiqIoiqIoivL9IsmiKIqiKIqiKIqiKIpyc/n6+gdlwLVd15FktgAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                                      </scg:List>
+                                    </uix:TargetAnchorable.Anchors>
+                                  </uix:TargetAnchorable>
+                                </uix:NGetAttribute.Target>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </uix:NGetAttribute>
+                              <If Condition="[Astate = &quot;enabled&quot;]" DisplayName="If Next button Is enable" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_4">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence DisplayName="Sequence: Next Button Enable" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message Active" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Next Button is active&quot;]">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:LogMessage>
+                                    <uix:NClick ClickType="Single" DisplayName="Click 'Next'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_8" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Timeout="4" Version="V1">
+                                      <uix:NClick.Target>
+                                        <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/searchReportsAction.do?org.apache.struts.taglib.html.TOKEN=39b0c344f3fa5f714b04a4f7e26da996&amp;domainId=4&amp;dateStart=14%2F08%2F2022&amp;reportTypeId=0&amp;dateEnd=14%2F08%2F2022" DesignTimeRectangle="359, 377, 26, 13" ElementType="Text" FriendlyName="'Next'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Next' parentid='gridPoint' tag='A' innertext='Next' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='Next' parentid='gridPoint' tag='A' innertext='Next' type='' class='' check:text='Next' /&gt;" Guid="00f59892-5806-4ab7-acdc-1a64d0b387d9" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAB4AAAARCAYAAADKZhx3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADYSURBVEhL7ZPbEYMgEEVtinqshmaoxVpogXCcueaCZKIfwZ84c2YfbPbuollyzuUJ/sLTWOpTtm0bHv6SZmOGCCG0BTXn8V1Yqu8JJ+F1XUuMscl5zV0uC1PoYu7rTGhArNeBzhFVPUsd530x1rf2hu4DTfV9SET5lNLuX94Y61vL0gi/RwLAwOQ0NIyE9xvyBD+Sr62VQ8CvaoTqvwkTfxRW7Dl83xABxVgJYJX321O834wS0Av7xqAmzqgOiLW5XgEWGKoRnoEGrPb9F5rBMYCc2TwknMsLsP110w3Y9KAAAAAASUVORK5CYII=" InformativeScreenshot="9696a99f4b686d17a54cd722fc547874.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                                          <uix:TargetAnchorable.Anchors>
+                                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                              <uix:Target DesignTimeRectangle="238, 375, 1109, 18" FriendlyName="'[First/Prev] 1,'" FullSelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tag='SPAN' class='pagelinks' title='Search Reports' /&gt;" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tag='SPAN' class='pagelinks' title='Search Reports' type='' aaname='[First/Prev] , ,  [/]' check:text='[First/Prev] 1, 2, 3 [Next/Last]' /&gt;" ImageBase64="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" SearchSteps="Selector, Image" />
+                                            </scg:List>
+                                          </uix:TargetAnchorable.Anchors>
+                                        </uix:TargetAnchorable>
+                                      </uix:NClick.Target>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </uix:NClick>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Assign DisplayName="Assign NextButton" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[NextButton]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">NO</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Assign DisplayName="Assign NextButton" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[NextButton]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">NO</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Else>
+                  </If>
+                  <If sap2010:Annotation.AnnotationText="This is just to aviod endless loop incase the the page has error.&#xA;You can increase the count index if page is more the 20 pages.&#xA;" Condition="[CountIndex &gt; 20]" DisplayName="For Error" sap:VirtualizedContainerService.HintSize="200,168" sap2010:WorkflowViewState.IdRef="If_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;Error encounter, Please try again.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_5" />
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <If Condition="[ReportFound = &quot;YES&quot;]" DisplayName="If ReportFound = &quot;YES&quot;" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="If_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:Highlight HighlightTime="{x:Null}" Color="GreenYellow" DisplayName="Highlight Report Name" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Highlight_1">
+                  <ui:Highlight.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[ReportElement]" Id="15729ff7-23fa-4d09-a0ef-d99e7d484a0d">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:Highlight.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:Highlight>
+              </If.Then>
+              <If.Else>
+                <Throw DisplayName="Throw BRE" Exception="[New BusinessRuleException(&quot;The Report for the Date: [&quot;+in_ReportDate+&quot;] is Not found, Please check back&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
+              </If.Else>
+            </If>
+            <ui:LogMessage DisplayName="Log Message: Report Found" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Report has been found on Row :&quot;+TableRow]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:LogMessage>
+            <ui:LogMessage DisplayName="Log Message: Download Report" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Report about to download&quot;]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:LogMessage>
+            <Assign DisplayName="Assign Selector Download Button" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Selector]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[String.Format("&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tableRow='*' tag='TABLE' /&gt;&lt;webctrl tableRow='{0}' tag='A' aaname='Download' colName='Download' /&gt;", TableRow)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:Highlight HighlightTime="{x:Null}" Color="Gold" DisplayName="Highlight Download Button" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="Highlight_2">
+              <ui:Highlight.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="246df020-edb9-445f-b01f-7cf48ed7c08a" Selector="[Selector]">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Highlight.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:Highlight>
+            <ui:GetLastDownloadedFile IgnoreFiles="{x:Null}" DisplayName="Wait for Download" DownloadFolder="[DownloadFolder]" File="[Out_FileDownloaded]" sap:VirtualizedContainerService.HintSize="434,503" sap2010:WorkflowViewState.IdRef="GetLastDownloadedFile_3" Timeout="300">
+              <ui:GetLastDownloadedFile.Body>
+                <ActivityAction>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,248" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NClick ClickType="Single" DisplayName="Click 'Download'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_7" InteractionMode="WindowMessages" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="2eff1393-66ee-4dc6-85d7-3d4758c82141" Version="V1">
+                      <uix:NClick.Target>
+                        <uix:TargetAnchorable BrowserURL="https://webpay.interswitchng.com/extraswitch/searchReportsAction.do?org.apache.struts.taglib.html.TOKEN=0c63dd411dfc6f9146f2c6c32440ac76&amp;domainId=4&amp;dateStart=28%2F07%2F2022&amp;reportTypeId=6&amp;dateEnd=28%2F07%2F2022" DesignTimeRectangle="1275, 620, 56, 13" ElementType="Text" FriendlyName="'Download'" FullSelectorArgument="[Selector]" FuzzySelectorArgument="&lt;webctrl src='/extraswitch/displayBody.do' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl type='' tag='A' aaname='Download' colName='Download' class='' check:text='Download' /&gt;" Guid="fb8a01eb-cdff-4fd4-9753-3f51930e2a50" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAARCAYAAACBzs+aAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEhSURBVFhH7ZKBjYMwDEVZi4VYh21YhmE4PcQ7fUyOtlKrnkqfZCV2bMc/0C0X4yv40/kKfidd9/xxas+d1/f9mpA2z/N2+nrqcM+g9jwIrgIpGMdx817LvxAMFBmfpmn1NXzjwzCse8gaHsxHI06e9fmY+PLXPVD/xDyrdVhyl2AGpBFnNMgcfYx68FLFZF/iDmg/cW/cGqi+tHrUuuQhwVh+RfAMrDfmA7hCHaA+Bty6h5XcNOO1zjO5S/BZwxyEL8o+hdaaOsCjgrGDiJO6Q+62rrQEU+CvyRm+OdV3GPNZ8YkLftISfHZPFZUPYJ7kmew8LichzUvFplqKgawxN3vgJy3BcHYPgo27Fx+5dQZ77wL8CvZVPtXkul/4GizLD7nLq//EUraOAAAAAElFTkSuQmCC" InformativeScreenshot="ecd64e10ee48f59900ffaf1e348141d5.png" ScopeSelectorArgument="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive" />
+                      </uix:NClick.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NClick>
+                  </Sequence>
+                </ActivityAction>
+              </ui:GetLastDownloadedFile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:GetLastDownloadedFile>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="346,158" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Sequence: Check if Correct File Has been Download" sap:VirtualizedContainerService.HintSize="208,66" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:Int32" Name="FileNameIndex" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign FileNameIndex" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[FileNameIndex]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[in_FileName.Length]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[in_FileName = Out_FileDownloaded.Name.Substring(0,FileNameIndex)]" DisplayName="Check If correct file has been downloaded" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="If_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <ui:LogMessage DisplayName="Log Message: Right File " sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Right File has been Downloaded: PROCEED&quot;]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                      </If.Then>
+                      <If.Else>
+                        <Throw DisplayName="Throw BRE" Exception="[new BusinessRuleException(&quot;Wrong File Has been Downloaded, I cant proceed this time.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1382, 744" BrowserType="Firefox" IconBase64="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" InformativeScreenshot="661ab0b1cc39aea9a4cebf2d8a0cdefa.png" Selector="&lt;html app='firefox.exe' title='ExtraSwitch' /&gt;" Url="[ExtraSwitchUrl]" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

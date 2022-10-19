@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence_PHCN_Settlement" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="In_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="In_Sisfig" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_ReportDate" Type="InArgument(s:DateTime)" />
+    <x:Property Name="out_ClearedFeeDebit" Type="OutArgument(x:String)" />
+    <x:Property Name="out_IncomeFeeCredit" Type="OutArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>675,515</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="72">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.Core.Activities.SAP</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>BalaReva.CamiCat</AssemblyReference>
+      <AssemblyReference>BalaReva.Excel.Base</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Sequence PHCN Settlement" sap:VirtualizedContainerService.HintSize="242,780" sap2010:WorkflowViewState.IdRef="Sequence_288">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="PayDirectUrl" />
+      <Variable x:TypeArguments="x:String" Name="PayDirectCredential" />
+      <Variable x:TypeArguments="x:String" Name="PayDirectUserName" />
+      <Variable x:TypeArguments="ss:SecureString" Name="PayDirectPassword" />
+      <Variable x:TypeArguments="x:String" Name="IntitutionCode" />
+      <Variable x:TypeArguments="x:Boolean" Name="ExistingPage" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_298">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MultipleAssign DisplayName="TO TEST" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_91">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_424">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[In_Config]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[new Dictionary(of String, Object)]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_425">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[In_Sisfig]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[new Dictionary(of String, Object)]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_439">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[In_Config("PayDirectURL")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">["https://172.25.15.11/paydirect/"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_440">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[In_Config("PayDirectCredential")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">["PayDirect_Credential"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_444">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[In_Sisfig("Intitution_Code")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">["FBN"]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_445">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="s:DateTime">[in_ReportDate]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="s:DateTime">[DateTime.Now.AddDays(-8)]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:MultipleAssign DisplayName="WF Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_93">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_441">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[PayDirectUrl]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[In_Config("PayDirectURL").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_442">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[PayDirectCredential]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[In_Config("PayDirectCredential").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_443">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[IntitutionCode]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[In_Sisfig("Intitution_Code").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[PayDirectCredential]" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[PayDirectPassword]" Username="[PayDirectUserName]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:GetRobotCredential>
+    <ui:KillProcess AppliesTo="{x:Null}" Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Chrome" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="chrome">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:KillProcess>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Login_Paydirect workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_171" UnSafe="False" WorkflowFileName="Downloads\Login_Paydirect.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="PayDirectUrl">[PayDirectUrl]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PayDirectUserName">[PayDirectUserName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InstitutionCode">[IntitutionCode]</InArgument>
+        <InArgument x:TypeArguments="ss:SecureString" x:Key="in_PayDirectPassword">[PayDirectPassword]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:UiElementExists DisplayName="Element Exists" Exists="[ExistingPage]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e2b5ef85-3490-49c8-8003-0bdd3b53e74b" InformativeScreenshot="4ad18f7541fbe00eb0f425ff92399e7a" Selector="&lt;html app='chrome.exe' title='PAYDirect*' /&gt;&lt;webctrl src='frameHandler.aspx' tag='FRAME' /&gt;&lt;webctrl tag='SPAN' aaname='Sorry, you have an existing PAYDirect session. This session has to expire before you can Login again.' parentid='Form1' /&gt;" TimeoutMS="5000">
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:UiElementExists.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:UiElementExists>
+    <If Condition="[ExistingPage]" DisplayName="If Exist Page Exist" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Login Again" sap:VirtualizedContainerService.HintSize="376,350" sap2010:WorkflowViewState.IdRef="Sequence_292">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  btnEndSession'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="490b4949-ca25-47a9-8032-09042c49b377" InformativeScreenshot="96bab709e1eac54c839f243a2d9f00b3" Selector="&lt;html app='chrome.exe' title='PAYDirect*' /&gt;&lt;webctrl src='frameHandler.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' aaname='End Current Session' parentid='Form1' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:Click.Target>
+          </ui:Click>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Login Paydirect workfl exixting Page Exow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_172" UnSafe="False" WorkflowFileName="Downloads\Login_Paydirect.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="PayDirectUrl">[PayDirectUrl]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_PayDirectUserName">[PayDirectUserName]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_InstitutionCode">[IntitutionCode]</InArgument>
+              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_PayDirectPassword">[PayDirectPassword]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_291">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" DisplayName="Use Browser Chrome: PAYDirect - powered by Interswitch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,797" sap2010:WorkflowViewState.IdRef="Sequence_295">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="MonthToSel" />
+              <Variable x:TypeArguments="x:String" Name="DayToSelect" />
+              <Variable x:TypeArguments="x:String" Name="YearToSelect" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NClick ClickType="Single" DisplayName="Click 'PHCN PAYDirect Reports'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/common/ReportsOptions.aspx" DesignTimeRectangle="877, 637, 118, 13" ElementType="Text" FriendlyName="'PHCN PAYDirect Reports'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='A' aaname='PHCN PAYDirect Reports' parentid='serverside_grid' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='A' aaname='PHCN PAYDirect Reports' parentid='serverside_grid' type='' class='' check:text='PHCN PAYDirect Reports' /&gt;" Guid="f92c0a30-10d8-4299-938c-115c0c847f47" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHoAAAARCAYAAAASarh9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKNSURBVGhD7VXZjeswDEyHqWl/3MNrwJ24lJQRe3mI1JCSHWOTxQLP+hjE4jE8RnZuz+dzG/j/MYS+CIbQF8EQ+iIYQl8ELvQybdvtVnGfq92eFes23dZtflTbfMdc9SkfxD3W7U7nxXkq9moLJA9syyq8yCP501p8yIVxbd8/QbuP6MP6e3Efw8FOM4LQ3lghMMFiw3FhIjIv2fy0bI6XvDst3nwvhO7V5vNjpjNxMNfjIF54WWiIs0vxrriIdh87vjTHr+Bgpxl9oQks4LT0BgOhX4pHcbT4c7H1bLX1WfOdh2OAi3MtthGawBdFLxv0XeImvqQlHr9Kzpft//ji2Bn6KTiaQ+un3DLHRHlix97lkqo9Xx6NX7cv6K3OaLbY36k32skSiSwxLbbho4bl96zQUFueC39eovRFPnzTe0JXGy+h8MoS6yLkq2HcwNGbL/eB6M1h87LPRPfLJzHV7hcDd1DEq3a4PJ0a/gWlOWw+xu5/tJG1g9WFnRK6xC+pqRzbq+0L4bhGRBDObE0M2pLQEIdvrUL7jG+kot1H9GUO9alYoQbX7wgl3Kk/t+cdprPsi7hzz4zdT/e+PS0sDFSBedyA/M+eiEX0BKjCnhO6XpZjoXvL+YnQ5ou5nV4ZHxbawPFZ8PeEprOIYW8dg5rk+JjHOSrUaaE7Q7ScL4Tms8fsC8284UyXg5+z3WKbXru+4z3NVCPOqDsScYq99h3te0IvxG/P+ZK+LTRDhhAhGVos5+lnBZoE9GqHz7YhCNT2ocK2vagf4vOFIIQZwId2WZzXSLUJzRwihC1cBfMaPFvxB5vlwizOmYUmeH+Ua59uQZrPhR74A3SE+y0Mof8SQ+iBT2MIfQk8t2+TTfBpNNv7BgAAAABJRU5ErkJggg==" InformativeScreenshot="e05fd0b9bbfd4be8b4933285d27fa0e7.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <uix:NClick ClickType="Single" DisplayName="Click 'PHCN PAYDirect'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/ReportsMenu.aspx?echo=?destPage=%2fpaydirect%2fphcn%2freports%2fReportsMenu.aspx%3fecho%3d&amp;userID=966124&amp;profileString=966124%7crparobot%7crpa%7crobot%7c%7crparobot%40firstbanknigeria.com%7c%7c2020%7cBank_Treasury_Officer%7c1%7c16%7c10%7cFBN%7cFirst+Bank+of+Nigeria+Plc%7c16%7c100%7cFBN%u00a0H%2fO%7c8%7cFBN%7c011%7cFirst+Bank+of+Nigeria+Plc" DesignTimeRectangle="473, 446, 170, 13" ElementType="Text" FriendlyName="'PHCN PAYDirect'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='PHCN PAYDirect  Settlement Details' tableRow='15' tag='A' parentid='grid' parentname='Form1' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='TABLE' /&gt;&lt;webctrl aaname='PHCN PAYDirect  Settlement Details' type='' tag='A' parentid='grid' parentname='Form1' class='' check:text='PHCN PAYDirect  Settlement Details' /&gt;" Guid="b6fb5601-34bf-4c1f-8c2f-60a1c893f617" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAK4AAAARCAYAAABEkJdOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAN1SURBVGhD7VfbjRsxDEx3+XQlqWNLcRP371KuDIdDkLzRLGV7YwS4xWkA2RIfw4doAf51X1g4IdbgLpwSa3AXTok1uAunxBrc74qbXc7lfv+M40/B59Xq3uLwAF+Di0bZqVY2rWngzYgvFiDhwcjXdcHHdlfj2UyuAN/On7BBnsUEL9O4P/SW5IV4sK6U+Cz+ISD+g4HSXjwMJ1xDfk/i/C/o3TL0nl4ZsFfrwB3jrv5tcKWJNYASmIvLi8p+Axvsww+DlLpHg1vNskDwqYEDj+lRWLp29q7jPRDnt4eVgXykHwXoKD56wz+cHYTrDIPLOpyf5niwjrcHtwiawFzA9BULv5vZPbPVhrAddNjnt8OSyQGdyQt2yPyLN+w2881Byx+gviTwSTl8/fWPtbtgirUDdOkbNsz1+w/pbd2ES/NIWdbgPlEX2wCv+PoPjHNMGUHvCXCejMX+Jtca3XcSo3txZ3cCmCgAwggGIKEuUC7XmTEa1b4qxOcvsH0PRRKGhghnvrT6S4QP+C/B7QjfIQTJKn7IKheciWdoIvMD5rOTEfKitCdZB1B5CNduCEKHPKo/JId99sT3IT/q672kfdkLOh3LXqmRwXGHnkNme56Dq8Q1VQAB7FQrCLvAlayQDyA/2KOI4WIIXgDF7i4vY7F7FltobFhW8cXOm2VnzaHN186zi2DkALs7fIgby/snXEM80kGu/jBjex6go741LIaBR9DpSoaYEqerEcje+Iq4u8EN2azXpgo0ARyNnAsA+e5yAfazD7xoeHk721mzIOdGYLF/FltAHJMNISiPuiyx42Yx+HILxPcM5T/zEfkQj3RtHgaWDz086PvO4BYPxRwgctgnhw6pDq7DZLgr5TZR4MXAABfggWRY+M9Z+uUQdk2cNUsHU4t6OrhxzpjVZLWzDXIrLjtj7zlrT2CrsgDy43wqP1ucB85X7IVrGDLSaR7434A92w89POjLfZ3dBaC6gds+jtaI/XRwbb9lLOEAzDzQKB2NXAvI4c3liamfbYbCCG2zunyCIylmg8u5sL6aJjyA1pB+3tyQZe6Ii/MuZ4k/6FEP6TouzuHRn7OU8xAMPTzoy4PLeQ69NfigJg9W+iTIF6vtF9n4n8Pg2A1uyJQrYaKFhfPBB/fj42uy11rruy7MacKOCwvnwxrchRPifv8LOLiGC6GIddIAAAAASUVORK5CYII=" InformativeScreenshot="714e15e820da0f52305d4c4ca352d362.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive" />
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_94">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_446">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[DayToSelect]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_ReportDate.ToString("dd")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_447">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[MonthToSel]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_ReportDate.ToString("MMM")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_448">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[YearToSelect]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_ReportDate.ToString("yyyy")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MultipleAssign>
+            <Sequence DisplayName="DATE  SELECT" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_296">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'From'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NTypeInto_5" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Text="[DayToSelect]" Version="V1">
+                <uix:NTypeInto.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="397, 310, 16, 18" ElementType="InputBox" FriendlyName="'24'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtDayFrom' tag='INPUT' type='text' name='txtDayFrom' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtDayFrom' tag='INPUT' type='text' name='txtDayFrom' class='defaultFormElementStyle' aaname='' /&gt;" Guid="0f4734b7-25b0-4719-9676-dbba9dae105e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEJSURBVDhPtZTBDYQgEEUpwQq0IE24a0GUQgN24IG7HXiyjFk+OCywuovEfcmYiDMPGeMIepj/Cud5pmEYqOs6aprmZyB3WZaj2hOEkJ0VlUQsDcK+793DcRxpXddjNUWI94G2bXO5qEEtEzJ4NyReEQsBNkYNWsR8CL+RC0FedyE0pGwxBC6kpt2upkLjrmXCXZPSULgb0lKQtPdvoV8DZcKMXUsSygShUX4DUCFM35DlzH2hUVakXMfifjL3hLaXUkjidjphFOCG0H/p6HRBElMmzN6MqRe6vqXHQx+rhDW/Xtu2x0ok5OEwTVPxcEAuak6Hw+PjC0CK3XCEs8I8kHs5YJ/iYSHRC8nYMP1VIfEKAAAAAElFTkSuQmCC" InformativeScreenshot="d815992ffca9a2a0bc51d171f6d326ba.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="365, 310, 29, 13" ElementType="Text" FriendlyName="'From'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' type='' class='' aaname='From: ' check:innerText='From:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACEAAAARCAYAAABTnsXCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC0SURBVEhL7ZLrDcMwCITZkLEYhVE8ise4GgxxXClNf6RtKvmkSCHm8eUw4QZaEKkFkRoQVcFEoP0jJQ4/qycIwXfGzjqHKAJigXBzhhW1farKm1tpVhECi4SbDK0FEjmsVmWq0NZnxF0v1+HJBuFNI8/jgPWafmYQCenvU07+3FsQR0705iZ3YbsrvamF7kQ0n3KO+u70nxAeZ57XjHWcQ1y0DpMPiXuTs66B+KEWROoGEMADRacIIZf1TnQAAAAASUVORK5CYII=" SearchSteps="Selector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                    <uix:TargetAnchorable.PointOffset>
+                      <uix:PointOffset Position="TopRight" X="-6" Y="10" />
+                    </uix:TargetAnchorable.PointOffset>
+                  </uix:TargetAnchorable>
+                </uix:NTypeInto.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NTypeInto>
+              <uix:NSelectItem DisplayName="Select Item 'From'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="[in_ReportDate.ToString(&quot;MMM&quot;)]" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+                <uix:NSelectItem.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="13">
+                    <x:String></x:String>
+                    <x:String>Jan</x:String>
+                    <x:String>Feb</x:String>
+                    <x:String>Mar</x:String>
+                    <x:String>Apr</x:String>
+                    <x:String>May</x:String>
+                    <x:String>Jun</x:String>
+                    <x:String>Jul</x:String>
+                    <x:String>Aug</x:String>
+                    <x:String>Sep</x:String>
+                    <x:String>Oct</x:String>
+                    <x:String>Nov</x:String>
+                    <x:String>Dec</x:String>
+                  </scg:List>
+                </uix:NSelectItem.Items>
+                <uix:NSelectItem.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="421, 310, 45, 24" ElementType="DropDown" FriendlyName="'Aug'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='ddlMonthFrom' tag='SELECT' name='ddlMonthFrom' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='ddlMonthFrom' tag='SELECT' name='ddlMonthFrom' type='' class='defaultFormElementStyle' aaname='' /&gt;" Guid="e3c7785d-c072-4056-a3cb-b5fe8ea98679" ImageBase64="" InformativeScreenshot="a43c2095d0b6e3f8f7e89b466a417856.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="365, 310, 29, 13" ElementType="Text" FriendlyName="'From'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' type='' class='' aaname='From: ' check:innerText='From:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACEAAAARCAYAAABTnsXCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC0SURBVEhL7ZLrDcMwCITZkLEYhVE8ise4GgxxXClNf6RtKvmkSCHm8eUw4QZaEKkFkRoQVcFEoP0jJQ4/qycIwXfGzjqHKAJigXBzhhW1farKm1tpVhECi4SbDK0FEjmsVmWq0NZnxF0v1+HJBuFNI8/jgPWafmYQCenvU07+3FsQR0705iZ3YbsrvamF7kQ0n3KO+u70nxAeZ57XjHWcQ1y0DpMPiXuTs66B+KEWROoGEMADRacIIZf1TnQAAAAASUVORK5CYII=" SearchSteps="Selector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NSelectItem.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NSelectItem>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'YEAR'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NTypeInto_7" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Text="[YearToSelect]" Version="V1">
+                <uix:NTypeInto.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="469, 310, 31, 18" ElementType="InputBox" FriendlyName="'2022'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtYearFrom' tag='INPUT' type='text' name='txtYearFrom' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtYearFrom' tag='INPUT' type='text' name='txtYearFrom' class='defaultFormElementStyle' aaname='' /&gt;" Guid="0153d13c-c9b1-476b-8116-f9cd4177b703" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACMAAAAWCAYAAABKbiVHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVEhL7ZRhDsMgCIW9ocfyKF6j/zxKj8EUoYDO2WbJ6pK+hMTCBh+vbg4W0pow27bdFiwDc4cemJH+DSZBcA4ch4+wUwXyKXqueYhU2KOXz+cIqeZzAbzKu6NQNYfJDQJPoeGenstQPuMgAk0h5BVIKeTB9JzPMr8uqXlOOGOFW2OHCmabizuiUb6wyWJFF2G0M+2QFo6knTH61hnT+AyMfa1a6LC5f1dg8PLp4XOY8hraS4oauHUSpre0H27h3m2O6pYSzWE+fHn8a7rmCGsOgw3UfwMGN6zu1BwD65xEgUa3mnxxjzWH+aEemJGGMHcF64BZQQvBALwAnnPrgQ73TqkAAAAASUVORK5CYII=" InformativeScreenshot="42c823e2f8322a3816e747d2f3cb0871.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="365, 310, 29, 13" ElementType="Text" FriendlyName="'From'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label17' tag='SPAN' type='' class='' aaname='From: ' check:innerText='From:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACEAAAARCAYAAABTnsXCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC0SURBVEhL7ZLrDcMwCITZkLEYhVE8ise4GgxxXClNf6RtKvmkSCHm8eUw4QZaEKkFkRoQVcFEoP0jJQ4/qycIwXfGzjqHKAJigXBzhhW1farKm1tpVhECi4SbDK0FEjmsVmWq0NZnxF0v1+HJBuFNI8/jgPWafmYQCenvU07+3FsQR0705iZ3YbsrvamF7kQ0n3KO+u70nxAeZ57XjHWcQ1y0DpMPiXuTs66B+KEWROoGEMADRacIIZf1TnQAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NTypeInto.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NTypeInto>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'To'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Text="[DayToSelect]" Version="V1">
+                <uix:NTypeInto.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="533, 310, 16, 18" ElementType="InputBox" FriendlyName="'30'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='text' id='txtDayTo' name='txtDayTo' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='text' id='txtDayTo' name='txtDayTo' class='defaultFormElementStyle' aaname='' /&gt;" Guid="40d9bde4-c493-47c7-8e81-98cdd876667f" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACWSURBVDhP7ZLbDYAgDEXZsGMxStfgj1Ec4wq2RfFHhfph4kma8Agnl0KAM+8JU0pTZXTCUX6h0AszYggIVsRYdAdlxCTrxrVwYUQ2hQpilhkTqO0JNxL2VIkIRa7uxkPhUVJbQTgFvC/MUXvYIk0Kjf3KTsISVV96sIc10fHQdnVdGHvl8m3I9R8+5MPCmTL2zjrhLARW6Wdbj3mu5cUAAAAASUVORK5CYII=" InformativeScreenshot="dd991d4793bb4933d2c7c48a1cad1397.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="509, 310, 15, 13" ElementType="Text" FriendlyName="'To'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' type='' class='' aaname='To: ' check:innerText='To:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABMAAAARCAYAAAA/mJfHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABqSURBVDhP7ZHbCcAgDEXvhhkro2SUjOIYt4qWihaqKP1pD/iRB4cbBDfyy+YpMqcCxM1Tzxsj9MlcCTGGUs4wIKtS1/20B43TiwdZoAkolivXKDzvnpelVMLiamY9b8q2nplY+YAFPiEjD7+5q7fbtnouAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NTypeInto.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NTypeInto>
+              <uix:NSelectItem DisplayName="Select Item 'To'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NSelectItem_2" Item="[MonthToSel]" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+                <uix:NSelectItem.Items>
+                  <scg:List x:TypeArguments="x:String" Capacity="13">
+                    <x:String></x:String>
+                    <x:String>Jan</x:String>
+                    <x:String>Feb</x:String>
+                    <x:String>Mar</x:String>
+                    <x:String>Apr</x:String>
+                    <x:String>May</x:String>
+                    <x:String>Jun</x:String>
+                    <x:String>Jul</x:String>
+                    <x:String>Aug</x:String>
+                    <x:String>Sep</x:String>
+                    <x:String>Oct</x:String>
+                    <x:String>Nov</x:String>
+                    <x:String>Dec</x:String>
+                  </scg:List>
+                </uix:NSelectItem.Items>
+                <uix:NSelectItem.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="557, 310, 45, 24" ElementType="DropDown" FriendlyName="'Aug'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='SELECT' id='ddlMonthTo' name='ddlMonthTo' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='SELECT' id='ddlMonthTo' name='ddlMonthTo' type='' class='defaultFormElementStyle' aaname='' /&gt;" Guid="130902fc-33f4-4871-b7d0-b365af4c0ede" ImageBase64="" InformativeScreenshot="33ac503b769b3ce889bc19399a76a875.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="509, 310, 15, 13" ElementType="Text" FriendlyName="'To'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' type='' class='' aaname='To: ' check:innerText='To:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABMAAAARCAYAAAA/mJfHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABqSURBVDhP7ZHbCcAgDEXvhhkro2SUjOIYt4qWihaqKP1pD/iRB4cbBDfyy+YpMqcCxM1Tzxsj9MlcCTGGUs4wIKtS1/20B43TiwdZoAkolivXKDzvnpelVMLiamY9b8q2nplY+YAFPiEjD7+5q7fbtnouAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NSelectItem.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NSelectItem>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'To'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Text="[YearToSelect]" Version="V1">
+                <uix:NTypeInto.Target>
+                  <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="605, 310, 31, 18" ElementType="InputBox" FriendlyName="'2022'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtYearTo' tag='INPUT' type='text' name='txtYearTo' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='txtYearTo' tag='INPUT' type='text' name='txtYearTo' class='defaultFormElementStyle' aaname='' /&gt;" Guid="e2fd2bd1-df29-4038-854e-65249b5a9490" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACMAAAAWCAYAAABKbiVHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVEhL7ZRhDsMgCIW9ocfyKF6j/zxKj8EUoYDO2WbJ6pK+hMTCBh+vbg4W0pow27bdFiwDc4cemJH+DSZBcA4ch4+wUwXyKXqueYhU2KOXz+cIqeZzAbzKu6NQNYfJDQJPoeGenstQPuMgAk0h5BVIKeTB9JzPMr8uqXlOOGOFW2OHCmabizuiUb6wyWJFF2G0M+2QFo6knTH61hnT+AyMfa1a6LC5f1dg8PLp4XOY8hraS4oauHUSpre0H27h3m2O6pYSzWE+fHn8a7rmCGsOgw3UfwMGN6zu1BwD65xEgUa3mnxxjzWH+aEemJGGMHcF64BZQQvBALwAnnPrgQ73TqkAAAAASUVORK5CYII=" InformativeScreenshot="6f31185b5186066ff91d662757ecbad0.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector, Image" Visibility="Interactive">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="509, 310, 15, 13" ElementType="Text" FriendlyName="'To'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label14' tag='SPAN' type='' class='' aaname='To: ' check:innerText='To:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABMAAAARCAYAAAA/mJfHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABqSURBVDhP7ZHbCcAgDEXvhhkro2SUjOIYt4qWihaqKP1pD/iRB4cbBDfyy+YpMqcCxM1Tzxsj9MlcCTGGUs4wIKtS1/20B43TiwdZoAkolivXKDzvnpelVMLiamY9b8q2nplY+YAFPiEjD7+5q7fbtnouAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NTypeInto.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NTypeInto>
+            </Sequence>
+            <uix:NClick ClickType="Single" DisplayName="Click 'Search'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="261, 486, 70, 20" ElementType="Button" FriendlyName="'Search'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' class='defaultButtonStyle' aaname='Search' check:text='Search' /&gt;" Guid="dfa10420-7736-4079-bdeb-183e6ee24063" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEoAAAAYCAYAAABdlmuNAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFFSURBVFhH7ZU9DoJAEEb3XFiYeBTqjQmtPZUVJ7AzHMHY2dt6npHZP2eXwUwCFOhM8gpmB7P7+BADWqJSUcJKonbHo8IQKxN1f74UgooSoqKEqCghvyXq0oAxDXTc2kxWF9W3h2Hz5oO9snOLsFVRTtL+DH3qPeBk6fXCbFVUZw1U7YNdQ3A9Jq2++F6ewAOcbtgfBO+HmfYMFUllNosPJIiq0+/G++ezfqImNpul7YYCmCTgwd2MF5Wlk0uP632kuwex0Ku+qijka0LCgcbXARRIRNF1Nq2FvOxhzGR1URQvDQ8SEpIEeryIK9S0/4+ivARM1USCgqTU/5dEdbb4fyIHKQ/Rt80wG0XGXpxhxBZSuN52EuU2Tl6j4mD0q5cJDL3KNpOJGt2Pc5sV9UOoKCEqSoiKEjIpShkTK4nS+l4qSlQAbyOIc3M5A/coAAAAAElFTkSuQmCC" InformativeScreenshot="68619a313c4929a78e9b5a33d742e535.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="357, 486, 100, 20" ElementType="Button" FriendlyName="'Printable Version'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='button' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl tag='INPUT' type='button' class='defaultButtonStyle' aaname='Printable Version' check:text='Printable Version' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGgAAAAYCAYAAAAWPrhgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJHSURBVGhD7VYxbsMwDPS70iFAnuI5CODVu6dMfkG2IE8IumXP2veoIkVRZ1lOGsN1lUICDogkkjreSa0rU0bWoxiU+VCDPg6Hgozgx8Cgz/tXQQYoBmWOYlDmKAZljvcx6Ho0m6ox/WjvZtptZepTvP4/MMugfl+ZqgJsj+aSiJsWFfCTGMJSBp2aJF/uaX8erL2G37ko8w3SZhyx2c2tbdD9bOpqZ9rrs7U8sIBBFnQrSTy5nS2/MNvwOYjqchorBO1Z8C0Wc/U1UiyJBWv+HDGo5toEL2hsEOanjScum+4W1vBV8TmSP1hrTNvteL0+RbyhF+XBmsj+oIed7cHVITy7WMsZRCSFlB4Kt55zVDAnIsdBjNZTQNMinK99IbFGwrjfXnyOSb1sNMSC4lwO8LLraqScPVW372Ie+CKBU6oO8EhhAYOAQNT4yKBUzkODXF4wCOJ0DsJMxshcEQsov2P+fh7VSQsLPBIXINTx50pckl/AfIPsTVB44RcyiBuC+q8ZFPIc0gIQHz3fc2bBonwVdlgHNXAvIvAYGTgwei2D4IkrFjAobo7yXjPoccMK4drb85zAYU35ezyqy3skOvCI6vzNC1rKoMGfG2lG46b/V4V6IMygrsz3CcEZrnb42AhrrpbM6Yzo7EtnPxh8ju4hD+wJOL2nQbLHYlGsF87N6astGOTXLfQcFIaA+RYpngI+F/kSonOCsCAkCxti8HIoD4zxHNYyqGA9FIMyRzEocxSDMsekQQX5wA81qIw8RzEo62HMN16kpWrxSJ5tAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NClick.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NClick>
+            <uix:NGetText DisplayName="Get Text 'Total Cleared'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="397, 558, 36, 13" ElementType="Text" FriendlyName="'N 0.00'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblTotalClearedFunds' tag='SPAN' aaname='*' parentid='Form1' parentname='Form1' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblTotalClearedFunds' tag='SPAN' parentid='Form1' parentname='Form1' type='' class='' /&gt;" Guid="78abde62-1f10-412f-9a8e-fe7467af1668" ImageBase64="" InformativeScreenshot="eab8e4fa93de55b59256bc01a8e44bdc.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="261, 558, 128, 13" ElementType="Text" FriendlyName="'Total Cleared'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblAmtLabel' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblAmtLabel' tag='SPAN' type='' class='' aaname='Total Cleared Collections:' check:innerText='Total Cleared Collections:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIQAAAARCAYAAAAc7wRXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJHSURBVGhD7VaLrcMgDMyGjMUIHYFRMkrH4GEb4g8mpW2qVnqchBQcsM/H5bPlhQWBZYgFhWWIBYVliAWFjxrinkLe4l5nM9hz3EJO9zr9KO45hS0/RW8I5v18z7+FaghoaMubM/ze5sQ8F8fWjCXyQ4bYo+BWxmmzbxrinnLA/tv0e6bq3xAgREhFrjO8awgyQxAnD2vj/iOGQDNIHrCWD6zHtYb4JiYMQYeHT0mNY9Mtho2QuPZpGoozNJ02hKrT8qgnt62thxvpHi0VvOXhqv2+IfaozarR60ExzxATHMIt34x2wxxHPd3vOHddj7E5wz0wBBVu4oBQRLQS8iqg2z1xGJzHgoXFPI7gEpaPzAn32pR5yDyjHugA+jhgpAfnlT2POZj8w0/Guf6yjpd7T5cbQgoI03avFxObaM50xJHgBiyMsEc+GrSFmj7iGLR8zBoYwNsxe09Di6ox0sPwxs0zHCqGhhjV09x5fTXK5OF7uMYQED9IeOJoYNyKgni0l+q2J8YKwcsN7wbVm93ToGtojPTweM9wqLjMEA2w7zVjXPPJkHvguhPHgghL0WGt+qkUeRB7KteyLl27fNS9Ok/lWnzOGgefnqmN+UBcytvrwby55zMOpu6Ln4yWg9cXHhzknNjPnDle+qkEIAmMs1A4Lz86vTgeRN4jNwsL4Bowahybo3mMWjhdyuSvNzlnKP8oA0MAjjo02LyeHsxb9+xzULkxh9TviZ/KuoTXizxlHJzfMsTCv8YyxILCMsSCwjLEgkDOfzFYkmbIakZZAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NGetText.Target>
+              <uix:NGetText.Text>
+                <OutArgument x:TypeArguments="x:String">[out_ClearedFeeDebit]</OutArgument>
+              </uix:NGetText.Text>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NGetText>
+            <uix:NGetText DisplayName="Get Text 'Total Bank'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="1379f261-35da-43a0-ab59-511a41120336" Version="V1">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable BrowserURL="https://172.25.15.11/paydirect/phcn/reports/SettlementDetails.aspx?pChannel=1" DesignTimeRectangle="397, 582, 36, 13" ElementType="Text" FriendlyName="'N 0.00'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblTotalCollFee' tag='SPAN' aaname='*' parentid='Form1' parentname='Form1' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='lblTotalCollFee' tag='SPAN' parentid='Form1' parentname='Form1' type='' class='' /&gt;" Guid="bfb04269-c2e1-45e8-90c4-a036da8a6b9e" ImageBase64="" InformativeScreenshot="883eadd2aeffd0b79159655135ebb034.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='PAYDirect - powered by Interswitch' /&gt;" SearchSteps="Selector" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="261, 582, 128, 13" ElementType="Text" FriendlyName="'Total Bank'" FullSelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label18' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='frames/body.aspx' tag='FRAME' /&gt;&lt;webctrl id='Label18' tag='SPAN' type='' class='' aaname='Total Bank Collection Fee:' check:innerText='Total Bank Collection Fee:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIQAAAARCAYAAAAc7wRXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJDSURBVGhD7ZbhkYQgDIXp0LIo4gqwFEuxDI4ECC8KLO5y92fzZpxRhOQl+c5bF0wmkAFhUjIgTEoGhEnpT4E49y04f+SnP9C5h835sDbDGfbNhWT7CN5tYT/5xVcoA0GFu+AaV3ue2LS+ukAc/pLnzaZPA5H8zuX7HIjDu7DJoVVQXWuga/UfQ+sLQcPa9ph+pAVAQI63vyRTQORGYvyYvw7sqtVArNJczz/VBBDw9cjrPEBF6YXe7HoWCGzgPTYv8uB93Mfr5SwCwfeNhr2ABvOls30glDdJpGv3P/j1o7P9GBKC+xHrK3FuRZD6QEz5wlyDfrwAIgUtw6LBpYR9c2kAqQFstLWJTVWzbYOQWw07AZps5GEPhs4eFOAgbI74xtpgmPRe4tT1Vvzuv4xmvrIOecq9kh4wX5R34Es84EzRQ0MvgIBi+LG8uwOhKAVTXSAkRxSa5IbUoisQpQjILXtbDUwaAaH9lbhtIHR96dJ7q3pAtPPF21HPRe1cI196vQ8Bag0QONBuA0AqR5QMnM7WuNLYIRBx/RoPpbxpPQbiVsulD1n/DsSkrxmt+ZeBZ3gAz4DgffyMzUhwTAFBu8XbVWm/ehfzc1z2muNyLMqNtYEfqIt17HzPeaEWUg+Idr68LjGeATHr69jzPXpo6K0flSQeonyKctPp2ccfR9ngEIgSU2IkYVz6ETkLRFkfQjHMV5qNjdfDwb11CDo2n5P6aE8/hlhVPX8IRNSML4n/GAjTV8uAMCkZECYlA8IECuEX70yHBQaJnVAAAAAASUVORK5CYII=" SearchSteps="Selector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NGetText.Target>
+              <uix:NGetText.Text>
+                <OutArgument x:TypeArguments="x:String">[out_IncomeFeeCredit]</OutArgument>
+              </uix:NGetText.Text>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NGetText>
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_95">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_449">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[out_ClearedFeeDebit]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[out_ClearedFeeDebit.Replace("N","").Replace(",","").Replace(" ","")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_450">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[out_IncomeFeeCredit]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[out_IncomeFeeCredit.Replace("N","").Replace(",","").Replace(" ","")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MultipleAssign>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1382, 744" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAaXSURBVFhH1ZZtbFRlFsfnEyKKjoKiInRooW/TTu9MW3lpaW87hb4hLfBl3WwXTTSriQaN2V3Xt4IxJhplWgoU+kKLoGyWIChqVhY6tLyK7vbLGokmjkBb2ipzS5EEuHee4/8597mdVirBtw+e5JdzztNnzu95bjqT6/rdRETX3N+UzNMHS3JDA8U53YPFOQYQCmMwmBPuL84J9Qazq9VHfp2QYghrB4qyo44QPaEXkv6ibBrQZc6hfs7ZMkcG9EDtWV3zqDE/LwaDuasgMRwRSzizhM6OEODMa4UBYfeg0P/V2QJtpRr30wI3DUkRD1bCfgzv122BrCFjYZ/MBf5R2U+9BTZ9TCCkxl5fQNA2cgu+icQW8EAIkFkke0dmo1HvQo16ALLozc8Sqm5T468d8rTOLRwBy9RwR9gnhzuSuNDOUpqfNZLPgJ48nzid57v2k+jRAw/yDRyBlKnBUiSH9+THBTwYfU+e3fNanm8MkDIja/N9q5RubGg7qj0ng/6IcxNbYt+Ih4+S9Jbl07mXX6DzrY3MUMNTNPRqJRlr/GS8BNZoQtZDnDXZqzVNDL2iGdStuZU2HoEdy2tXPxNUt8oSZ/Js6ZkFPiHX5Oml+OKH79KPhfhmL1ndS8j6OJvM436yjgdQ+4WFOqaydVwT5jFttdLGI/D2skjgrWXUWZVrPzIpRj69IFMi+laUkdnXy6K93Zfp0fbvqKpumJH13u4r/De61ItDVEjRWI5ljcq+6JinoL21rMq/vZokNa+VOlI6PT9TnJqfSb3LS1neZ8ToL23fUU7t0Lj8sfEC7+FDfJInRRBKMq/CPJShKz0OsLW6Lmt7ldAk26rogxW5dGpehmBwgAvv7+HLPdA4TNkvGlcDuVM/suUC7xWDeyDyCuuol0Y4JnM6EzuaFv9GQBrOerOKst5cShryog0V9FmhjyJzvXSmejEPfO9/l8kPgf8Fm4CsgZMdZC/3yrBO3CfMo2kQjiYVh0ql2JG0bqV3uXxblxq+rfcTMvnakcErj+dT5L50MfDXJ3jYw7iZBvFYouNg8F4ZsS+fgTAFwmSbIwxJzCPJhtK7XJntSwiIzDbOzLzNFfT/fK8wmtbzsPI3hijr+ejVQPjDvuz1If5M7HQ9ZHPIPDybLAnq0VnpXa4MiDPaKgXndpW3VNKqvxdSdHMDDyvF0EwIRuP7Qe8g98qIncIBDidBmCisw7Nw+yQcJhFrNkrvcnlbK6PeLRXCC6m3tQIgc18h9jet4WEPtQxTxnPnrouHWs7zZ2KfPyLF+I/3QOhBzRkkoE6IKj0O0FLRnd5STuktFZSOA3CNnNZaLv6wdqmQw3b/9xJ5MTz92XN2BjJ70TtrspZ5D/bKsE4sgGymsA7NFOahmYSsmIG1GWGld7nSmstDgNKayxTllNpcJpx+9xf7+RArm89TmhKmPfutQtZxljXYj18M7JQiMrvuZaxD00W8vpdiXdPjX8PUxjI9tblUpDZBCGROaUK/uRR1KeW2r6Ce4X7qicZYkPqPb8flzzig3DN8ET9EJ+ZCeA9ZXfcIq+tuYXbeTQ5YIzoyrUrpXS5Pm+5O2bzYSIEQmVI2AbsWkmRQ9HaNkIeQ8c6nl6imaYiKX40yNRC/ox673LNr32II74IsjtU1DWvTOMc6p32l1PGApDYZ4uTGRcR50yLBdaOqQdH2Gtp1ch+LxotdJz+ipdsrIbyTLMhkdrBkPniHnTun1iptPDwh3T1nY4kxZ+MiYiAfqbkvEbM3lghZ69v+RI/9e7WoP7GV1oG/HXiNAq3V2FdCO/fgR+bg1HGxDk4RIELhu8Z/WYXgydkbSsgmaGdIkzYEhV0HVR0kJzv7ktYH6YH2uZDcLsyDt0PocJvdh2/D39zC6pxy7ZfU2etLQnJYUkMxD7UpFomj+kT0WOM9vK44te9O3NAtzLAbQsmtDNY4x8Lu63s5TWoItsvBietsQWJDEQ4AZL+uiGZxX8yZa6w/vc1HZsctZIVvwQEmC7NjMurJAj3nK+HJ1/dS6kRifVHdrHrI1unCA7geQcd6vF+4KY++/mgKDnDzGKyOm4QkFr75p72WO+Gp11cm1BVGPHU6oRYK1IUiAThrzf/Cb3vHJEgn2fnAjTYdk4wrB256UI37eYFvhweS2oRQYQSQA9Y5522cJ2zhRLIkHRMhnhBFv5rC7qtfPn9JzFi7sGrGGwUhiMMz1xYYQPxz53TIJxjm/gnd5oEbQuZ/Juq/uvi3C5fre3NPTn98OIE0AAAAAElFTkSuQmCC" InformativeScreenshot="ba00ba723ec57aef9a09666ab4e73ad1.png" Selector="&lt;html app='chrome.exe' title='PAYDirect*' /&gt;" Url="https://172.25.15.11/paydirect/main.htm" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
